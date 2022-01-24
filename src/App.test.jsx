@@ -1,14 +1,17 @@
-import { render, screen } from '@testing-library/react'
-import Header from './views/Layout/Layout'
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
+// import Header from './views/Layout/Layout'
+import App from './App'
 
-const user = {}
+// const user = {}
 
-test('Should render the header', () => {
-  render(<Header user={user} />)
+test('Should render the header', async () => {
+  render(<App />)
 
   const image = screen.getByAltText(/Alchemy Logo/i)
-  expect(image).toBeInTheDocument()
+  const text = await screen.findByRole('banner', { paragraph: /meet vonta/i })
 
-  const username = screen.getByRole('banner', { paragraph: /meet/i })
-  expect(username).toBeInTheDocument()
+  expect(screen.getByText(/loading/i)).toBeInTheDocument()
+  expect(image).toBeInTheDocument()
+  expect(text).toBeInTheDocument()
+  await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
 })
