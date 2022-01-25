@@ -1,5 +1,6 @@
-import { findByText, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import App from '../../App'
+// import Home from './Home'
 
 // const user = {
 //   id: 1,
@@ -12,7 +13,10 @@ import App from '../../App'
 //   color: 'crimson',
 // }
 
+// initially did it this way, and after seeing how Vonta did it I realize the benefits. I didn't want to change it from what I had though, so I just commented out what I could have done
+
 test('Should render the user profile', async () => {
+  // render(<Home user={user} />)
   render(<App />)
 
   const name = await screen.findByRole('heading', { name: /vonta/i })
